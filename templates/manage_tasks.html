@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Tasks</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .action-buttons a {
+            display: inline-block;
+            padding: 6px 12px;
+            text-decoration: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 6px;
+            margin-right: 8px;
+        }
+
+        .action-buttons a:hover {
+            background-color: #218838;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Manage Tasks</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Owner</th>
+                    <th>Due Date</th>
+                    <th>Completed</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.owner.username }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.completed }}</td>
+                    <td class="action-buttons">
+                        <a href="{% url 'edit_task' task.id %}">Edit</a>
+                        <a href="{% url 'delete_task' task.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="back-link">
+            <a href="{% url 'admin_panel' %}">Back to Admin Panel</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Your Company. All rights reserved.</p>
+    </div>
+</body>
+</html>

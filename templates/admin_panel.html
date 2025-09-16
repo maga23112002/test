@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        nav ul li a {
+            display: inline-block;
+            padding: 12px 25px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 6px;
+            font-size: 18px;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+        }
+
+        nav ul li a:hover {
+            background-color: #0056b3;
+        }
+
+        nav ul li a:active {
+            background-color: #004085;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'manage_tasks' %}">Manage Tasks</a></li>
+                <li><a href="{% url 'manage_users' %}">Manage Users</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="footer">
+        <p>&copy; 2025 Your Company. All rights reserved.</p>
+    </div>
+</body>
+</html>

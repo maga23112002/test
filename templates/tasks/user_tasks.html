@@ -1,123 +1,256 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Tasks</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7fb;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ваши задачи</title>
+<style>
+    body {
+        font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+        align-items: flex-start;
+        padding-top: 40px;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    .container {
+        width: 100%;
+        max-width: 800px;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        padding: 30px 40px;
+        box-sizing: border-box;
+        animation: fadeIn 0.8s ease-in-out;
+    }
 
-        h2 {
-            text-align: center;
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 20px;
-        }
+    h2 {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 30px;
+    }
 
-        a {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 16px;
-        }
+    .add-task-btn {
+        display: inline-block;
+        background: linear-gradient(135deg, #28a745, #1e7e34);
+        color: white;
+        padding: 14px 24px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 12px;
+        text-decoration: none;
+        box-shadow: 0 6px 16px rgba(40,167,69,0.4);
+        transition: all 0.3s ease;
+        margin-bottom: 25px;
+    }
 
-        a:hover {
-            text-decoration: underline;
-        }
+    .add-task-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(40,167,69,0.6);
+    }
 
-        .task-list {
-            list-style-type: none;
-            padding: 0;
-        }
 
-        .task-list li {
-            background-color: #f9f9f9;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    .logout,
+.add-task-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+    color: white;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 6px 16px rgba(40,167,69,0.4);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none; /* важно для <button> */
+    text-align: center;
+}
 
-        .task-list li strong {
-            color: #333;
-            font-size: 18px;
-        }
+.logout:hover,
+.add-task-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(40,167,69,0.6);
+}
+    
 
-        .task-list li .task-status {
-            color: #666;
-            font-size: 14px;
-        }
+    .task-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
 
-        .task-list li a {
-            background-color: #007bff;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            margin-left: 10px;
-            text-decoration: none;
-        }
+    .task-list li {
+        background: #f9f9f9;
+        padding: 18px 20px;
+        margin: 12px 0;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-        .task-list li a:hover {
-            background-color: #0056b3;
-        }
+    .task-list li:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
 
-        .no-tasks {
-            text-align: center;
-            font-size: 18px;
-            color: #999;
-        }
+    .task-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        .add-task-btn {
-            display: inline-block;
-            background-color: #28a745;
-            color: white;
-            padding: 12px 20px;
-            font-size: 16px;
-            border-radius: 6px;
-            text-align: center;
-            margin-bottom: 20px;
-            text-decoration: none;
-        }
+    .task-header strong {
+        color: #333;
+        font-size: 18px;
+    }
 
-        .add-task-btn:hover {
-            background-color: #218838;
-        }
-    </style>
+    .task-status {
+        color: #666;
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .task-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 12px;
+    }
+
+    .task-actions a,
+    .task-actions button {
+        flex: 1;
+        margin: 0 5px;
+        background: linear-gradient(135deg, #007bff, #6a11cb);
+        color: white;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .task-actions a:hover,
+    .task-actions button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(106,17,203,0.4);
+    }
+
+    .task-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        padding: 0 10px;
+        background: #f0f0f0;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+
+    .task-content.open {
+        padding: 10px;
+    }
+
+    .no-tasks {
+        text-align: center;
+        font-size: 18px;
+        color: #999;
+        margin-top: 20px;
+    }
+
+    .top-buttons {
+    display: flex;
+    justify-content: space-between; 
+    margin-bottom: 25px;
+}
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h2>Your Tasks</h2>
-        <a href="{% url 'add_task' %}" class="add-task-btn">Add New Task</a>
-        <ul class="task-list">
-            {% for task in tasks %}
-                <li>
-                    <div>
-                        <strong>{{ task.title }}</strong>
-                        <span class="task-status">- {{ task.status }}</span>
-                    </div>
-                    <div>
-                        <a href="{% url 'edit_task' task.id %}">Edit</a>
-                        <a href="{% url 'delete_task' task.id %}">Delete</a>
-                    </div>
-                </li>
-            {% empty %}
-                <p class="no-tasks">You don't have any tasks yet.</p>
-            {% endfor %}
+<div class="container">
+    <h2>Ваши задачи</h2>
+        <div class="top-buttons">
+            <a href="{% url 'add_task' %}" class="add-task-btn">Добавить задачу</a>
+        
+            {% if user.is_staff %}
+                <a href="{% url 'admin_panel' %}" class="add-task-btn">Админ</a>
+            {% endif %}
+        
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout">Выход</button>
+            </form>
+        </div>
+    <ul class="task-list">
+        {% for task in tasks %}
+        <li>
+            <div class="task-header">
+                <strong>{{ task.title }}</strong>
+                <span class="task-status">{{ task.status }}</span>
+            </div>
+            <div class="task-actions">
+                <button type="button" class="view-btn">Показать</button>
+                <button type="button" class="status-btn">
+                    {% if task.status == "Done" %}Отметить как в работе{% else %}Отметить как выполнено{% endif %}
+                </button>
+                <a href="{% url 'edit_task' task.id %}">Редактировать</a>
+                <a href="{% url 'delete_task' task.id %}">Удалить</a>
+            </div>
+            <div class="task-content">
+                {{ task.description }}
+            </div>
+        </li>
+        {% empty %}
+        <p class="no-tasks">У вас пока нет задач.</p>
+        {% endfor %}
+    </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+   
+    const viewButtons = document.querySelectorAll('.view-btn');
+    viewButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const taskContent = this.closest('li').querySelector('.task-content');
+            const isOpen = taskContent.classList.toggle('open');
+            if (isOpen) {
+                taskContent.style.maxHeight = taskContent.scrollHeight + 'px';
+                this.textContent = 'Скрыть';
+            } else {
+                taskContent.style.maxHeight = '0';
+                this.textContent = 'Показать';
+            }
+        });
+    });
+
+    const statusButtons = document.querySelectorAll('.status-btn');
+    statusButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const statusSpan = this.closest('li').querySelector('.task-status');
+            if (statusSpan.textContent.trim() === 'Выполнено') {
+                statusSpan.textContent = 'В работе';
+                this.textContent = 'Отметить как выполнено';
+            } else {
+                statusSpan.textContent = 'Выполнено';
+                this.textContent = 'Отметить как в работе';
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>

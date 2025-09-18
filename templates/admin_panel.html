@@ -1,85 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7fb;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Панель администратора</title>
+<style>
+    body {
+        font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+        align-items: flex-start;
+        padding-top: 40px;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    .container {
+        width: 100%;
+        max-width: 600px;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        padding: 30px 40px;
+        box-sizing: border-box;
+        animation: fadeIn 0.8s ease-in-out;
+        text-align: center;
+    }
 
-        h1 {
-            text-align: center;
-            color: #333;
-            font-size: 32px;
-            margin-bottom: 30px;
-        }
+    h1 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 30px;
+    }
 
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
+    .admin-button {
+        display: block;
+        background: linear-gradient(135deg, #28a745, #1e7e34);
+        color: white;
+        padding: 14px 24px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 12px;
+        text-decoration: none;
+        margin: 15px 0;
+        box-shadow: 0 6px 16px rgba(40,167,69,0.4);
+        transition: all 0.3s ease;
+    }
 
-        nav ul li {
-            margin-bottom: 15px;
-            text-align: center;
-        }
+    .admin-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(40,167,69,0.6);
+    }
 
-        nav ul li a {
-            display: inline-block;
-            padding: 12px 25px;
-            text-decoration: none;
-            color: white;
-            background-color: #007bff;
-            border-radius: 6px;
-            font-size: 18px;
-            width: 100%;
-            max-width: 200px;
-            text-align: center;
-        }
+    .footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 14px;
+        color: #999;
+    }
 
-        nav ul li a:hover {
-            background-color: #0056b3;
-        }
-
-        nav ul li a:active {
-            background-color: #004085;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 14px;
-            color: #777;
-        }
-    </style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Admin Panel</h1>
-        <nav>
-            <ul>
-                <li><a href="{% url 'manage_tasks' %}">Manage Tasks</a></li>
-                <li><a href="{% url 'manage_users' %}">Manage Users</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div class="footer">
-        <p>&copy; 2025 Your Company. All rights reserved.</p>
-    </div>
+<div class="container">
+    <h1>Панель администратора</h1>
+
+    <a href="{% url 'manage_tasks' %}" class="admin-button">Управление задачами</a>
+    <a href="{% url 'manage_users' %}" class="admin-button">Управление пользователями</a>
+    <a href="{% url 'user_tasks' %}" class="admin-button">Назад</a>
+</div>
+
+
 </body>
 </html>
